@@ -2,6 +2,7 @@ import { Injectable, Scope } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Logger } from "pino";
 import pino from "pino";
+import * as PinoRoll from "pino-roll";
 
 @Injectable()
 export class LoggerService {
@@ -11,12 +12,29 @@ export class LoggerService {
     this.logger = pino({
       level: this.configService.get<string>("LOG_LEVEL", "info"),
       transport: {
-        target: "pino-pretty",
-        options: {
-          colorize: true,
-        },
+        targets: [
+          {
+            target: "pino-pretty",
+            options: {
+              colorize: true,
+            },
+            level: "info",
+          },
+          {
+            target: "pino-roll",
+            options: {
+              file: this.configService.get<string>(
+                "LOG_FILE_PATH",
+                "./logs/app.log"
+              ),
+              frequency: "daily",
+              size: "10m",
+              mkdir: true,
+            },
+            level: "info",
+          },
+        ],
       },
-      // Add file logging later (separate TODO)
     });
   }
 

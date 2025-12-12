@@ -1,0 +1,4 @@
+export enum LlmIntent {
+  FILE_OPERATION = "FILE_OPERATION",
+  GENERAL_QUESTION = "GENERAL_QUESTION",
+}

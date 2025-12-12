@@ -1,15 +1,27 @@
 import { Module } from "@nestjs/common";
 import { LlmController } from "./llm.controller";
 import { LlmService } from "./llm.service";
-import { ConfigModule } from "@nestjs/config";
-import { HttpModule } from "@nestjs/axios";
-import { FilesModule } from "../files/files.module"; // Import FilesModule
+import { FilesModule } from "../files/files.module";
 import { LoggerModule } from "../logger/logger.module";
+import { LlmActionService } from "./modules/llm-action.service";
+import { IntentClassifierService } from "./modules/intent-classifier.service";
+import { GeneralQuestionHandlerService } from "./modules/general-question-handler.service";
+import { FileOperationSummarizerService } from "./modules/file-operation-summarizer.service";
+import { FileOperationHandlerService } from "./modules/file-operation-handler.service";
+import { ConversationHistoryService } from "./modules/conversation-history.service";
 
 @Module({
-  imports: [ConfigModule, HttpModule, FilesModule, LoggerModule],
+  imports: [FilesModule, LoggerModule],
   controllers: [LlmController],
-  providers: [LlmService],
-  exports: [LlmService], // Export LlmService if it needs to be used by other modules (e.g., FilesModule for action execution context)
+  providers: [
+    LlmService,
+    LlmActionService,
+    IntentClassifierService,
+    GeneralQuestionHandlerService,
+    FileOperationSummarizerService,
+    FileOperationHandlerService,
+    ConversationHistoryService,
+  ],
+  exports: [LlmService],
 })
 export class LlmModule {}
