@@ -3,7 +3,7 @@ import { LoggerService } from "../../logger/logger.service";
 import { ollama } from "ollama-ai-provider-v2";
 import { generateText } from "ai";
 import { SUMMARY_PROMPT } from "../llm.prompts";
-import { LlmAction } from "./llm-action.service";
+// import { LlmAction } from "./llm-action.service"; // Удаляем
 
 interface ConversationMessage {
   role: "user" | "assistant";
@@ -20,7 +20,7 @@ export class FileOperationSummarizerService {
 
   async summarizeFileOperation(
     userPrompt: string,
-    llmAction: LlmAction,
+    llmAction: string,
     actionResult: any,
     conversationHistory: ConversationMessage[]
   ): Promise<string> {
@@ -40,8 +40,8 @@ export class FileOperationSummarizerService {
     );
 
     const { text: summaryResponse } = await generateText({
-      model: ollama("deepseek-r1:8b"),
-      providerOptions: { ollama: { think: true } },
+      model: ollama("llama3:8b"),
+      // providerOptions: { ollama: { think: true } },
       prompt: `Narative Context: ${this.formatConversationHistory(
         conversationHistory
       )}`,

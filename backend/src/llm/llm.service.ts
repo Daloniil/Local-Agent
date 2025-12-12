@@ -107,6 +107,7 @@ export class LlmService {
         LlmLogMessages.RECEIVED_QUERY(prompt),
         "LlmService"
       );
+
       const classificationResult = await this._classifyIntent(prompt);
 
       let assistantResponse: string;

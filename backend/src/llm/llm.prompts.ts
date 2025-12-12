@@ -1,4 +1,9 @@
-export const CLASSIFICATION_PROMPT = `You are a helpful assistant that classifies user intent. Your goal is to determine if the user's request is a file operation (list, read, write, delete) or a general question. If the user's intent is a GENERAL_QUESTION, you should also provide a general_Answer to their question immediately. Return a JSON object with a 'classification' field (either 'FILE_OPERATION' or 'GENERAL_QUESTION') and an optional 'general_Answer' field if the classification is 'GENERAL_QUESTION'.`;
+export const CLASSIFICATION_PROMPT = `
+You are an AI assistant that classifies user intent.
+IMPORTANT: You DO NOT interact with the file system directly. All file operations are delegated to other specialized functions.
+Based on the user's message, classify their intent as either 'FILE_OPERATION' or 'GENERAL_QUESTION'.
+If the user is asking a general question, provide a concise answer in the 'general_Answer' field.
+`;
 
 export const FILE_OPERATION_PROMPT = `
           Ты — ассистент, чья ЗАДАЧА СТРОГО — сгенерировать JSON для файловой операции, которую будет ВЫПОЛНЯТЬ СИСТЕМА.

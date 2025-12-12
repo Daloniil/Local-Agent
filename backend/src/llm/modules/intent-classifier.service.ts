@@ -27,8 +27,7 @@ export class IntentClassifierService {
     );
 
     const { object } = await generateObject({
-      model: ollama("deepseek-r1:8b"),
-      providerOptions: { ollama: { think: true } },
+      model: ollama("llama3:8b"),
       prompt,
       system: CLASSIFICATION_PROMPT,
       schema: z.object({

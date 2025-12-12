@@ -35,8 +35,8 @@ export class GeneralQuestionHandlerService {
     );
 
     const { text: generalResponse } = await generateText({
-      model: ollama("deepseek-r1:8b"),
-      providerOptions: { ollama: { think: true } },
+      model: ollama("llama3:8b"),
+      // providerOptions: { ollama: { think: true } },
       prompt: generalQuestionPrompt,
     });
 
